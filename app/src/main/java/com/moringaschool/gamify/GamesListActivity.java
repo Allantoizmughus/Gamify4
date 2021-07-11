@@ -12,9 +12,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GamesListActivity extends AppCompatActivity {
     @BindView(R.id.CategoryList) TextView mCategoryView;
@@ -48,5 +52,18 @@ public class GamesListActivity extends AppCompatActivity {
 
         Call<GameSearchResponse> call = client.getGames(category, "games");
 
+        call.enqueue(new Callback<GameSearchResponse>() {
+            @Override
+            public void onResponse(Call<GameSearchResponse> call, Response<GameSearchResponse> response) {
+                if(response.isSuccessful()){
+                    Class<? extends GameSearchResponse> gamesList=response.body().getClass();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GameSearchResponse> call, Throwable t) {
+
+            }
+        });
     }
 }
