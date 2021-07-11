@@ -31,5 +31,6 @@ public class GamesClient {
                     .build();
 
         }
+        return retrofit.create(ApiCallInterface.class);
     }
 }

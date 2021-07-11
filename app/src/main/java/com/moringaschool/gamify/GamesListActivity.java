@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
 
 public class GamesListActivity extends AppCompatActivity {
     @BindView(R.id.CategoryList) TextView mCategoryView;
@@ -42,6 +43,10 @@ public class GamesListActivity extends AppCompatActivity {
         Intent intent= getIntent();
         String category = intent.getStringExtra("category");
         mCategoryView.setText("Here are all the games in Category "+category);
+
+        ApiCallInterface client = GamesClient.getClient();
+
+        Call<GameSearchResponse> call = client.getGames(category, "games");
 
     }
 }

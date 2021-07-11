@@ -6,7 +6,7 @@ import retrofit2.http.Query;
 
 public interface ApiCallInterface {
     @GET("/api/games")
-    Call<GameSearchResponse> getData(
+    Call<GameSearchResponse> getGames(
             @Query("category") String category,
             @Query("term") String term
     );
