@@ -1,9 +1,12 @@
-package com.moringaschool.gamify;
+package com.moringaschool.gamify.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+
+import com.moringaschool.gamify.R;
+import com.moringaschool.gamify.contactFragment;
 
 public class ContactsActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.moringaschool.gamify;
+package com.moringaschool.gamify.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.moringaschool.gamify.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtra("category",category);
             startActivity(intent);
         }else if(v == mContactsButton){
-            Intent intent = new Intent(MainActivity.this,ContactsActivity.class);
+            Intent intent = new Intent(MainActivity.this, ContactsActivity.class);
             startActivity(intent);
         }
     }

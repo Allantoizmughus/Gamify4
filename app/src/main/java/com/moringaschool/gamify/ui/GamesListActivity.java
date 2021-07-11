@@ -1,4 +1,4 @@
-package com.moringaschool.gamify;
+package com.moringaschool.gamify.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
+import com.moringaschool.gamify.network.ApiCallInterface;
+import com.moringaschool.gamify.models.GameSearchResponse;
+import com.moringaschool.gamify.network.GamesClient;
+import com.moringaschool.gamify.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,4 +1,4 @@
-package com.moringaschool.gamify;
+package com.moringaschool.gamify.network;
 
 import java.io.IOException;
 

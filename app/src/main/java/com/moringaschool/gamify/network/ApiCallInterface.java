@@ -1,4 +1,6 @@
-package com.moringaschool.gamify;
+package com.moringaschool.gamify.network;
+
+import com.moringaschool.gamify.models.GameSearchResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
