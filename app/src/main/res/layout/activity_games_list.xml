@@ -17,10 +17,10 @@
         android:fontFamily="@font/merienda_one"
         android:text="Category X List" />
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listView"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerView"
         android:layout_below="@+id/CategoryList"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
