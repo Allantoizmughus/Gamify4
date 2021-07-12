@@ -65,9 +65,10 @@ public class GamesListActivity extends AppCompatActivity {
         call.enqueue(new Callback<GameSearchResponse>() {
             @Override
             public void onResponse(Call<GameSearchResponse> call, Response<GameSearchResponse> response) {
-                hideProgressBar();
                 if(response.isSuccessful()){
                     games = response.body().getGames();
+                    mAdapter = new GamesListAdapter(GamesListActivity.this, games);
+
                 }
             }
 
