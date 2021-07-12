@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class GamesListActivity extends AppCompatActivity {
     ProgressBar mProgressBar;
 
     public List<GameSearchResponse> games;
+    private static final String TAG = GamesListActivity.class.getSimpleName();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -54,6 +56,7 @@ public class GamesListActivity extends AppCompatActivity {
         call.enqueue(new Callback<GameSearchResponse>() {
             @Override
             public void onResponse(Call<GameSearchResponse> call, Response<GameSearchResponse> response) {
+                Log.e(TAG, "This is Okay!!");
                 hideProgressBar();
                 if(response.isSuccessful()){
                     games = response.body().getGames();
