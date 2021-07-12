@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringaschool.gamify.R;
 import com.moringaschool.gamify.models.GameSearchResponse;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
