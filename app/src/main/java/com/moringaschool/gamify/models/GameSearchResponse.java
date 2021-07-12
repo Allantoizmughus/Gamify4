@@ -3,6 +3,8 @@ package com.moringaschool.gamify.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 
 public class GameSearchResponse {
 
@@ -40,6 +42,8 @@ public class GameSearchResponse {
     @Expose
     private String freetogameProfileUrl;
 
+    private List<GameSearchResponse> games;
+
     /**
      * No args constructor for use in serialization
      * 
@@ -61,7 +65,7 @@ public class GameSearchResponse {
      * @param platform
      * @param freetogameProfileUrl
      */
-    public GameSearchResponse(Integer id, String title, String thumbnail, String shortDescription, String gameUrl, String genre, String platform, String publisher, String developer, String releaseDate, String freetogameProfileUrl) {
+    public GameSearchResponse(Integer id, String title, String thumbnail, String shortDescription, String gameUrl, String genre, String platform, String publisher, String developer, String releaseDate, String freetogameProfileUrl, List<GameSearchResponse> games) {
         super();
         this.id = id;
         this.title = title;
@@ -74,6 +78,7 @@ public class GameSearchResponse {
         this.developer = developer;
         this.releaseDate = releaseDate;
         this.freetogameProfileUrl = freetogameProfileUrl;
+        this.games =games;
     }
 
     public Integer getId() {
@@ -162,6 +167,9 @@ public class GameSearchResponse {
 
     public void setFreetogameProfileUrl(String freetogameProfileUrl) {
         this.freetogameProfileUrl = freetogameProfileUrl;
+    }
+    public List<GameSearchResponse> getGames(){
+        return games;
     }
 
 }
