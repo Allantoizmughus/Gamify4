@@ -25,7 +25,7 @@ public class GamesClient {
                     })
                     .build();
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://www.freetogame.com")
+                    .baseUrl("https://www.freetogame.com/api/")
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

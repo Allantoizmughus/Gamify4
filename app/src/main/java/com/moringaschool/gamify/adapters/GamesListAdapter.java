@@ -19,8 +19,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.GamesViewHolder> {
-    private List<GameSearchResponse> mGames;
     private Context mContext;
+    private List<GameSearchResponse> mGames;
+
 
     public GamesListAdapter(Context context, List<GameSearchResponse> games){
         mContext =context;
@@ -64,11 +65,11 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.Game
             itemView.setOnClickListener(this);
         }
 
-        public void bindGames(GameSearchResponse game) {
-            mGameNameTextView.setText(game.getTitle());
-            mDescriptionNameTextView.setText(game.getShortDescription());
-            mDateTextView.setText(game.getReleaseDate());
-            Picasso.get().load(game.getThumbnail()).into(mGameImageView);
+        public void bindGames(GameSearchResponse gameSearchResponse) {
+            mGameNameTextView.setText(gameSearchResponse.getTitle());
+            mDescriptionNameTextView.setText(gameSearchResponse.getShortDescription());
+            mDateTextView.setText(gameSearchResponse.getReleaseDate());
+            Picasso.get().load(gameSearchResponse.getThumbnail()).into(mGameImageView);
         }
 
         @Override
