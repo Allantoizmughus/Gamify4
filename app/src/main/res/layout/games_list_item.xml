@@ -7,7 +7,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/gameImageView"
         android:layout_width="130dp"
         android:layout_height="100dp"
         android:scaleType="centerCrop"
