@@ -45,6 +45,9 @@ public class GamesListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_games_list);
         ButterKnife.bind(this);
         layoutManager=new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mAdapter=new GamesListAdapter(games);
+        mRecyclerView.setAdapter(mAdapter);
 
         Log.e("TAG", "onCreate GamesActivity");
         Intent intent = getIntent();
@@ -55,18 +58,19 @@ public class GamesListActivity extends AppCompatActivity {
 
     }
     private void fetchPosts(){
+        Log.e("TAG", "fetchPosts");
         mProgressBar.setVisibility(View.VISIBLE);
         GamesClient.getClient().getGames().enqueue(new Callback<List<GameSearchResponse>>(){
 
             @Override
             public void onResponse(Call<List<GameSearchResponse>> call, Response<List<GameSearchResponse>> response) {
-                games= response.body();
-                Log.e("TAG","Response="+games);
-                Log.e("TAG","Inside onResponse");
-                mAdapter.getGames(games);
-                Log.e("TAG","Inside onResponse1");
-
-                hideProgressBar();
+//                games= response.body();
+//                Log.e("TAG","Response="+games);
+//                Log.e("TAG","Inside onResponse");
+//                mAdapter.getGames(games);
+//                Log.e("TAG","Inside onResponse1");
+//
+//                hideProgressBar();
                 if(response.isSuccessful() && response.body() != null){
                     games.addAll(response.body());
                     mAdapter.notifyDataSetChanged();

@@ -25,7 +25,11 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.Game
 
     public GamesListAdapter(Context context, List<GameSearchResponse> games){
         mContext =context;
-        this.mGames = games;
+        mGames = games;
+    }
+
+    public GamesListAdapter(List<GameSearchResponse> games) {
+        this.mGames=games;
     }
 
 
