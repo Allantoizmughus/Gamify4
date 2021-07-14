@@ -1,5 +1,4 @@
 package com.moringaschool.gamify.models;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -46,8 +45,8 @@ public class GameSearchResponse {
      * No args constructor for use in serialization
      * 
      */
-    public GameSearchResponse() {
-    }
+//    public GameSearchResponse() {
+//    }
 
     /**
      * 

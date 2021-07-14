@@ -12,7 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GamesClient {
-    private static Retrofit retrofit;
+    private static Retrofit retrofit = null;
 
     public static ApiCallInterface getClient(){
         if(retrofit == null){

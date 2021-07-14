@@ -18,6 +18,7 @@ import com.moringaschool.gamify.models.GameSearchResponse;
 import com.moringaschool.gamify.network.GamesClient;
 import com.moringaschool.gamify.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,8 +34,9 @@ public class GamesListActivity extends AppCompatActivity {
     @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.progressBar)
     ProgressBar mProgressBar;
+    LinearLayoutManager layoutManager;
 
-    List<GameSearchResponse> games;
+    List<GameSearchResponse> games = new ArrayList<>();
     private static final String TAG = GamesListActivity.class.getSimpleName();
 
     @Override
@@ -42,41 +44,56 @@ public class GamesListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games_list);
         ButterKnife.bind(this);
+        layoutManager=new LinearLayoutManager(this);
 
-        Intent intent= getIntent();
+        Log.e("TAG", "onCreate GamesActivity");
+        Intent intent = getIntent();
         String category = intent.getStringExtra("category");
-        mCategoryView.setText("Here are all the games in Category "+category);
+        mCategoryView.setText("Here are all the games in Category " + category);
 
-        ApiCallInterface client = GamesClient.getClient();
+        fetchPosts();
 
-        Call<GameSearchResponse> call = client.getGames();
+    }
+    private void fetchPosts(){
+        mProgressBar.setVisibility(View.VISIBLE);
+        GamesClient.getClient().getGames().enqueue(new Callback<List<GameSearchResponse>>(){
 
-        call.enqueue(new Callback<GameSearchResponse>() {
             @Override
-            public void onResponse(Call<GameSearchResponse> call, Response<GameSearchResponse> response) {
-                Log.e(TAG, "This is Okay!!");
-                hideProgressBar();
-                if(response.isSuccessful()){
-                    games = response.body().getGames();
-                    mAdapter = new GamesListAdapter(GamesListActivity.this, games);
-                    mRecyclerView.setAdapter(mAdapter);
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GamesListActivity.this);
-                    mRecyclerView.setLayoutManager(layoutManager);
-                    mRecyclerView.setHasFixedSize(true);
+            public void onResponse(Call<List<GameSearchResponse>> call, Response<List<GameSearchResponse>> response) {
+                games= response.body();
+                Log.e("TAG","Response="+games);
+                Log.e("TAG","Inside onResponse");
+                mAdapter.getGames(games);
+                Log.e("TAG","Inside onResponse1");
 
-                    showGames();
+                hideProgressBar();
+                if(response.isSuccessful() && response.body() != null){
+                    games.addAll(response.body());
                     mAdapter.notifyDataSetChanged();
+                    mProgressBar.setVisibility(View.GONE);
+
+//                    mAdapter = new GamesListAdapter(GamesListActivity.this, games);
+//                    mRecyclerView.setAdapter(mAdapter);
+//                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GamesListActivity.this);
+//                    mRecyclerView.setLayoutManager(layoutManager);
+//                    mRecyclerView.setHasFixedSize(true);
+//
+//                      showGames();
+
 
                 }
             }
 
             @Override
-            public void onFailure(Call<GameSearchResponse> call, Throwable t) {
+            public void onFailure(Call<List<GameSearchResponse>> call, Throwable t) {
+                Log.e("TAG","Inside onFailure");
                 hideProgressBar();
                 showFailureMessage();
             }
-        });
+    });
+
     }
+
 
     public void showFailureMessage() {
         mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");

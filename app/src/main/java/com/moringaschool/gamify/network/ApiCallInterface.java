@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface ApiCallInterface {
-    @GET("games")
+    @GET("/api/games")
     Call<List<GameSearchResponse>> getGames(
     );
 }

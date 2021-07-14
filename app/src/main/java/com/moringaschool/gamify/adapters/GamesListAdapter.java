@@ -28,9 +28,6 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.Game
         mGames = games;
     }
 
-    public GamesListAdapter(List<GameSearchResponse> games) {
-        mGames=games;
-    }
 
     @Override
     public GamesListAdapter.GamesViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
@@ -57,6 +54,10 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.Game
         }
         notifyDataSetChanged();
     }
+
+    public void getGames(List<GameSearchResponse> games) {
+    }
+
 
     public class GamesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @BindView(R.id.gameImageView)
