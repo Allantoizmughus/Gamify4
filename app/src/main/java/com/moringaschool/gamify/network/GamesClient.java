@@ -1,5 +1,7 @@
 package com.moringaschool.gamify.network;
 
+import com.moringaschool.gamify.Constant;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -14,19 +16,19 @@ public class GamesClient {
 
     public static ApiCallInterface getClient(){
         if(retrofit == null){
-            OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                    .addInterceptor(new Interceptor(){
-                        @Override
-                        public Response intercept(Chain chain) throws IOException {
-                            Request newRequest  = chain.request().newBuilder()
-                                    .build();
-                            return chain.proceed(newRequest);
-                        }
-                    })
-                    .build();
+//            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+//                    .addInterceptor(new Interceptor(){
+//                        @Override
+//                        public Response intercept(Chain chain) throws IOException {
+//                            Request newRequest  = chain.request().newBuilder()
+//                                    .build();
+//                            return chain.proceed(newRequest);
+//                        }
+//                    })
+//                    .build();
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://www.freetogame.com/api/")
-                    .client(okHttpClient)
+                    .baseUrl(Constant.BASE_URL)
+                    //.client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 

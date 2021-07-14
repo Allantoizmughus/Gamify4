@@ -28,9 +28,13 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.Game
         mGames = games;
     }
 
+    public GamesListAdapter(List<GameSearchResponse> games) {
+        mGames=games;
+    }
+
     @Override
     public GamesListAdapter.GamesViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_games_list, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.games_list_item, parent, false);
         GamesViewHolder viewHolder = new GamesViewHolder(view);
         return viewHolder;
     }
@@ -44,6 +48,14 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.Game
     @Override
     public int getItemCount() {
         return mGames.size();
+    }
+
+    public void loadGamesList(List<GameSearchResponse> games){
+        this.mGames.clear();
+        if(games != null){
+            mGames.addAll(games);
+        }
+        notifyDataSetChanged();
     }
 
     public class GamesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

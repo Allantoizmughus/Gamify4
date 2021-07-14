@@ -28,19 +28,17 @@ import retrofit2.Response;
 
 public class GamesListActivity extends AppCompatActivity {
     @BindView(R.id.CategoryList) TextView mCategoryView;
-    @BindView(R.id.recyclerView)
-    RecyclerView mRecyclerView;
-    private GamesListAdapter mAdapter;
+    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+    GamesListAdapter mAdapter;
     @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.progressBar)
     ProgressBar mProgressBar;
 
-    public List<GameSearchResponse> games;
+    List<GameSearchResponse> games;
     private static final String TAG = GamesListActivity.class.getSimpleName();
 
-    @SuppressLint("SetTextI18n")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games_list);
         ButterKnife.bind(this);
@@ -51,7 +49,7 @@ public class GamesListActivity extends AppCompatActivity {
 
         ApiCallInterface client = GamesClient.getClient();
 
-        Call<GameSearchResponse> call = client.getGames(category, "games");
+        Call<GameSearchResponse> call = client.getGames();
 
         call.enqueue(new Callback<GameSearchResponse>() {
             @Override
@@ -67,6 +65,7 @@ public class GamesListActivity extends AppCompatActivity {
                     mRecyclerView.setHasFixedSize(true);
 
                     showGames();
+                    mAdapter.notifyDataSetChanged();
 
                 }
             }
@@ -79,21 +78,16 @@ public class GamesListActivity extends AppCompatActivity {
         });
     }
 
-    private void showFailureMessage() {
+    public void showFailureMessage() {
         mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
         mErrorTextView.setVisibility(View.VISIBLE);
     }
 
-    private void showUnsuccessfulMessage() {
-        mErrorTextView.setText("Something went wrong. Please try again later");
-        mErrorTextView.setVisibility(View.VISIBLE);
-    }
-
-    private void showGames() {
+    public void showGames() {
         mRecyclerView.setVisibility(View.VISIBLE);
     }
 
-    private void hideProgressBar() {
+    public void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
     }
 

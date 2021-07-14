@@ -42,8 +42,6 @@ public class GameSearchResponse {
     @Expose
     private String freetogameProfileUrl;
 
-    private List<GameSearchResponse> games;
-
     /**
      * No args constructor for use in serialization
      * 
@@ -78,7 +76,6 @@ public class GameSearchResponse {
         this.developer = developer;
         this.releaseDate = releaseDate;
         this.freetogameProfileUrl = freetogameProfileUrl;
-        this.games =games;
     }
 
     public Integer getId() {
@@ -167,9 +164,6 @@ public class GameSearchResponse {
 
     public void setFreetogameProfileUrl(String freetogameProfileUrl) {
         this.freetogameProfileUrl = freetogameProfileUrl;
-    }
-    public List<GameSearchResponse> getGames(){
-        return games;
     }
 
 }
