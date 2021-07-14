@@ -41,7 +41,7 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.Game
 
 
     @Override
-    public void onBindViewHolder(GamesListAdapter.GamesViewHolder holder, int position) {
+    public void onBindViewHolder(GamesViewHolder holder, int position) {
         holder.mGameNameTextView.setText(mGames.get(position).getTitle());
         holder.mDescriptionNameTextView.setText(mGames.get(position).getShortDescription());
         holder.mDateTextView.setText(mGames.get(position).getReleaseDate());
