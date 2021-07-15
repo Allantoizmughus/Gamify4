@@ -13,6 +13,11 @@ For more Contribution, Pull requests are welcomed. For major changes, please ope
 
 Website's link to view Live click here:https://github.com/Allantoizmughus/Gamify.git
 
+## End points
+| URL                                            | HTTP Verb   |                                 DESCRIPTION|
+|--                                              |  ---        |                                   ---      |
+|/games                                          |get          |     Get Games List                              |
+
 MIT License
 
 Copyright (c) 2021 Allan Mugweru.
