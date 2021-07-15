@@ -45,11 +45,11 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.Game
         holder.mGameNameTextView.setText(mGames.get(position).getTitle());
         holder.mDescriptionNameTextView.setText(mGames.get(position).getShortDescription());
         holder.mDateTextView.setText(mGames.get(position).getReleaseDate());
-//        Picasso.get()
-//                .load(mGames.get(position).getThumbnail())
-//                .centerCrop()
-//                .fit()
-//                .into(GamesViewHolder);
+        Picasso.get()
+                .load(mGames.get(position).getThumbnail())
+                .centerCrop()
+                .fit()
+                .into(holder.mGameImageView);
 
     }
 
