@@ -29,37 +29,27 @@
         android:textStyle="bold"
         tools:ignore="HardcodedText" />
 
-    <CheckedTextView
-        android:id="@+id/checkedTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Spinner
+        android:id="@+id/planets_spinner"
+        android:layout_width="150dp"
+        android:layout_height="25dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/AppName"
-        android:text="CheckedTextView"
-        android:layout_marginTop="35dp"
-        android:background="@color/teal_200"/>
-
-
-
-
-    <EditText
-        android:id="@+id/category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/AppName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
         android:background="@color/accent"
-        android:hint="Enter Category" />
+        android:layout_below="@+id/AppName"
+        android:layout_marginTop="30dp"/>
+
 
     <Button
         android:id="@+id/ViewCategoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/category"
+        android:layout_below="@+id/planets_spinner"
         android:layout_centerHorizontal="true"
         android:text="View Category"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textSize="18dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/teal_200"/>
 
     <Button
         android:id="@+id/contacts"
@@ -68,7 +58,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:text="Contacts" />
-
+        android:textSize="18dp"
+        android:text="Contacts"
+        android:background="@color/teal_200"/>
 
 </RelativeLayout>
