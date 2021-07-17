@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.moringaschool.gamify.Constant;
 import com.moringaschool.gamify.adapters.GamesListAdapter;
 import com.moringaschool.gamify.network.ApiCallInterface;
 import com.moringaschool.gamify.models.GameSearchResponse;
@@ -36,6 +39,9 @@ public class GamesListActivity extends AppCompatActivity {
     ProgressBar mProgressBar;
     LinearLayoutManager layoutManager;
 
+    private SharedPreferences mSharedPreferences;
+    private String mRecentCategory;
+
     List<GameSearchResponse> games = new ArrayList<>();
     private static final String TAG = GamesListActivity.class.getSimpleName();
 
@@ -55,6 +61,10 @@ public class GamesListActivity extends AppCompatActivity {
         mCategoryView.setText("Here are all the games in Category " + category);
 
         fetchPosts();
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentCategory = mSharedPreferences.getString(Constant.PREFERENCES_CATEGORY_KEY, null);
+        Log.d("Shared Pref Category", mRecentCategory);
 
     }
     private void fetchPosts(){
