@@ -56,7 +56,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v == mViewCategoryButton) {
             String category = mSelect.getSelectedItem().toString();
-            addToSharedPreferences(category);
+            if(!(category).equals("")){
+                addToSharedPreferences(category);
+            }
             Intent intent = new Intent(MainActivity.this, GamesListActivity.class);
             intent.putExtra("category",category);
             Log.e("TAG","Before startActivity");

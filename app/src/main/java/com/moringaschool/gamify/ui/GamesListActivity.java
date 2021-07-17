@@ -57,14 +57,15 @@ public class GamesListActivity extends AppCompatActivity {
 
         Log.e("TAG", "onCreate GamesActivity");
         Intent intent = getIntent();
-        String category = intent.getStringExtra("category");
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentCategory = mSharedPreferences.getString(Constant.PREFERENCES_CATEGORY_KEY, null);
+        String category = mRecentCategory;
+//        String category = intent.getStringExtra("category");
         mCategoryView.setText("Here are all the games in Category " + category);
 
         fetchPosts();
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentCategory = mSharedPreferences.getString(Constant.PREFERENCES_CATEGORY_KEY, null);
-        Log.d("Shared Pref Category", mRecentCategory);
 
     }
     private void fetchPosts(){
@@ -74,27 +75,10 @@ public class GamesListActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<List<GameSearchResponse>> call, Response<List<GameSearchResponse>> response) {
-//                games= response.body();
-//                Log.e("TAG","Response="+games);
-//                Log.e("TAG","Inside onResponse");
-//                mAdapter.getGames(games);
-//                Log.e("TAG","Inside onResponse1");
-//
-//                hideProgressBar();
                 if(response.isSuccessful() && response.body() != null){
                     games.addAll(response.body());
                     mAdapter.notifyDataSetChanged();
                     mProgressBar.setVisibility(View.GONE);
-
-//                    mAdapter = new GamesListAdapter(GamesListActivity.this, games);
-//                    mRecyclerView.setAdapter(mAdapter);
-//                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GamesListActivity.this);
-//                    mRecyclerView.setLayoutManager(layoutManager);
-//                    mRecyclerView.setHasFixedSize(true);
-//
-//                      showGames();
-
-
                 }
             }
 
