@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1047965447920",
+    "project_id": "gamify-a3380",
+    "storage_bucket": "gamify-a3380.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047965447920:android:e60e22eb71636d19263435",
+        "android_client_info": {
+          "package_name": "com.moringaschool.gamify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1047965447920-c27h5fojlaqcnf852hivnjtalll3dp48.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.moringaschool.gamify",
+            "certificate_hash": "37d0e740dedd8677c7105a865f4dd8a2eabef458"
+          }
+        },
+        {
+          "client_id": "1047965447920-qbqjoclkka2i5nldq9c6ifjtnuq7hrkj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnthgrMaYJWONut9W596AH5HEd2txGebE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1047965447920-qbqjoclkka2i5nldq9c6ifjtnuq7hrkj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -60,8 +60,8 @@ public class GamesListActivity extends AppCompatActivity {
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mRecentCategory = mSharedPreferences.getString(Constant.PREFERENCES_CATEGORY_KEY, null);
-        String category = mRecentCategory;
-//        String category = intent.getStringExtra("category");
+        //String category = mRecentCategory;
+        String category = intent.getStringExtra("category");
         mCategoryView.setText("Here are all the games in Category " + category);
 
         fetchPosts();
