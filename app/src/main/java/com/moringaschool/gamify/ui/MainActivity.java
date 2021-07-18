@@ -1,5 +1,6 @@
 package com.moringaschool.gamify.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,8 +16,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.moringaschool.gamify.Constant;
 import com.moringaschool.gamify.R;
 
@@ -42,6 +46,21 @@ private DatabaseReference mSearchedCategoryReference;
                 .getInstance()
                 .getReference()
                 .child(Constant.FIREBASE_CHILD_SEARCHED_CATEGORY);
+
+        mSearchedCategoryReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange( DataSnapshot datasnapshot) {
+                for(DataSnapshot categorySnapshot: datasnapshot.getChildren()){
+                    String category = categorySnapshot.getValue().toString();
+                    Log.d("Category update","Category" +category);
+                }
+            }
+
+            @Override
+            public void onCancelled( DatabaseError databaseError) {
+                //update UI here if error occurred.
+            }
+        });
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -82,7 +101,7 @@ private DatabaseReference mSearchedCategoryReference;
         }
     }
     public void saveCategoryToFirebase(String category){
-        mSearchedCategoryReference.setValue(category);
+        mSearchedCategoryReference.push().setValue(category);
     }
 
 //    private void addToSharedPreferences(String category) {

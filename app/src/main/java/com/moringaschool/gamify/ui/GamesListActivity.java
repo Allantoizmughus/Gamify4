@@ -39,8 +39,8 @@ public class GamesListActivity extends AppCompatActivity {
     ProgressBar mProgressBar;
     LinearLayoutManager layoutManager;
 
-    private SharedPreferences mSharedPreferences;
-    private String mRecentCategory;
+//    private SharedPreferences mSharedPreferences;
+//    private String mRecentCategory;
 
     List<GameSearchResponse> games = new ArrayList<>();
     private static final String TAG = GamesListActivity.class.getSimpleName();
@@ -58,8 +58,8 @@ public class GamesListActivity extends AppCompatActivity {
         Log.e("TAG", "onCreate GamesActivity");
         Intent intent = getIntent();
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentCategory = mSharedPreferences.getString(Constant.PREFERENCES_CATEGORY_KEY, null);
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mRecentCategory = mSharedPreferences.getString(Constant.PREFERENCES_CATEGORY_KEY, null);
         //String category = mRecentCategory;
         String category = intent.getStringExtra("category");
         mCategoryView.setText("Here are all the games in Category " + category);
