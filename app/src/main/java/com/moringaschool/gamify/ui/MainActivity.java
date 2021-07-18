@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.moringaschool.gamify.Constant;
 import com.moringaschool.gamify.R;
 
@@ -28,18 +30,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.contacts) Button mContactsButton;
     @BindView(R.id.planets_spinner) Spinner mSelect;
 
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
+//    private SharedPreferences mSharedPreferences;
+//    private SharedPreferences.Editor mEditor;
+private DatabaseReference mSearchedCategoryReference;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mSearchedCategoryReference = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child(Constant.FIREBASE_CHILD_SEARCHED_CATEGORY);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mEditor = mSharedPreferences.edit();
 
 
         ArrayAdapter<String> myAdapter =new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item,getResources().getStringArray(R.array.cate));
@@ -56,9 +65,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v == mViewCategoryButton) {
             String category = mSelect.getSelectedItem().toString();
-            if(!(category).equals("")){
-                addToSharedPreferences(category);
-            }
+
+            saveCategoryToFirebase(category);
+
+//            if(!(category).equals("")){
+//                addToSharedPreferences(category);
+//            }
             Intent intent = new Intent(MainActivity.this, GamesListActivity.class);
             intent.putExtra("category",category);
             Log.e("TAG","Before startActivity");
@@ -69,7 +81,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if(v== mSelect){
         }
     }
-    private void addToSharedPreferences(String category) {
-        mEditor.putString(Constant.PREFERENCES_CATEGORY_KEY, category).apply();
+    public void saveCategoryToFirebase(String category){
+        mSearchedCategoryReference.setValue(category);
     }
+
+//    private void addToSharedPreferences(String category) {
+//        mEditor.putString(Constant.PREFERENCES_CATEGORY_KEY, category).apply();
+//    }
 }
