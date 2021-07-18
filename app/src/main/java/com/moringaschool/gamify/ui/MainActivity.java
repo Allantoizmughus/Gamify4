@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //    private SharedPreferences mSharedPreferences;
 //    private SharedPreferences.Editor mEditor;
 private DatabaseReference mSearchedCategoryReference;
+private ValueEventListener mSearchedCategoryReferenceListener;
 
 
 
@@ -47,7 +48,7 @@ private DatabaseReference mSearchedCategoryReference;
                 .getReference()
                 .child(Constant.FIREBASE_CHILD_SEARCHED_CATEGORY);
 
-        mSearchedCategoryReference.addValueEventListener(new ValueEventListener() {
+       mSearchedCategoryReferenceListener = mSearchedCategoryReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange( DataSnapshot datasnapshot) {
                 for(DataSnapshot categorySnapshot: datasnapshot.getChildren()){
@@ -107,4 +108,10 @@ private DatabaseReference mSearchedCategoryReference;
 //    private void addToSharedPreferences(String category) {
 //        mEditor.putString(Constant.PREFERENCES_CATEGORY_KEY, category).apply();
 //    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        mSearchedCategoryReference.removeEventListener(mSearchedCategoryReferenceListener);
+    }
 }
