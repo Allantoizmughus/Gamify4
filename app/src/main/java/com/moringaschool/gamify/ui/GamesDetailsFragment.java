@@ -2,8 +2,10 @@ package com.moringaschool.gamify.ui;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Parcel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +14,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.moringaschool.gamify.R;
+import com.moringaschool.gamify.models.GameSearchResponse;
+import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class GamesDetailsFragment extends Fragment {
@@ -26,40 +33,46 @@ public class GamesDetailsFragment extends Fragment {
     @BindView(R.id.linkTextView) TextView mLinkLabel;
     @BindView(R.id.saveGameButton) Button mSaveButtonLabel;
 
+    private GameSearchResponse mGames;
+
 
     public GamesDetailsFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GamesDetailsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static GamesDetailsFragment newInstance(String param1, String param2) {
-        GamesDetailsFragment fragment = new GamesDetailsFragment();
-        Bundle args = new Bundle();
 
-        fragment.setArguments(args);
-        return fragment;
+    public static GamesDetailsFragment newInstance(GameSearchResponse game) {
+        GamesDetailsFragment gamesDetailsFragment = new GamesDetailsFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("game", Parcels.wrap(game));
+        gamesDetailsFragment.setArguments(args);
+        return gamesDetailsFragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
+        assert getArguments() !=null;
+        mGames = Parcels.unwrap(getArguments().getParcelable("game"));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_games_details, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_games_details,container,false);
+        ButterKnife.bind(this,view);
+        Picasso.get().load(mGames.getThumbnail()).into(mImageLabel);
+
+        mNameLabel.setText(mGames.getTitle());
+        mDateLabel.setText(mGames.getReleaseDate());
+        mDescriptionLabel.setText(mGames.getShortDescription());
+        mDeveloperLabel.setText(mGames.getDeveloper());
+        mPublisherLabel.setText(mGames.getPublisher());
+        mLinkLabel.setText(mGames.getGameUrl());
+
+
+        return view;
     }
 }
