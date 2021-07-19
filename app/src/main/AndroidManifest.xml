@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.moringaschool.gamify">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,19 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Gamify">
+        <activity android:name=".ui.GamesDetailsActivity"></activity>
         <activity android:name=".ui.ContactsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.moringaschool.gamify.ui.MainActivity">
-            </meta-data>
+                android:value="com.moringaschool.gamify.ui.MainActivity"></meta-data>
         </activity>
-        <activity android:name=".ui.GamesListActivity" >
+        <activity android:name=".ui.GamesListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.moringaschool.gamify.ui.MainActivity">
-            </meta-data>
+                android:value="com.moringaschool.gamify.ui.MainActivity"></meta-data>
         </activity>
-        <activity android:name=".ui.MainActivity"
+        <activity
+            android:name=".ui.MainActivity"
             android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
