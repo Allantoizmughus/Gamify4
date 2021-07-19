@@ -1,6 +1,7 @@
 package com.moringaschool.gamify.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringaschool.gamify.R;
 import com.moringaschool.gamify.models.GameSearchResponse;
+import com.moringaschool.gamify.ui.GamesDetailsActivity;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.GamesViewHolder> {
+public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.GamesViewHolder>{
     private Context mContext;
     private List<GameSearchResponse> mGames;
 
@@ -58,17 +62,6 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.Game
         return mGames.size();
     }
 
-//    public void loadGamesList(List<GameSearchResponse> games){
-//        this.mGames.clear();
-//        if(games != null){
-//            mGames.addAll(games);
-//        }
-//        notifyDataSetChanged();
-//    }
-//
-//    public void getGames(List<GameSearchResponse> games) {
-//    }
-
 
     public class GamesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @BindView(R.id.gameImageView)
@@ -98,7 +91,11 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.Game
 
         @Override
         public void onClick(View v) {
-
+            int itemPosition = getLayoutPosition();
+            Intent intent = new Intent(mContext, GamesDetailsActivity.class);
+            intent.putExtra("position",itemPosition);
+            intent.putExtra("games", Parcels.wrap(mGames));
+            mContext.startActivity(intent);
         }
     }
 }
