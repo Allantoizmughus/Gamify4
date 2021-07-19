@@ -94,7 +94,7 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.Game
             int itemPosition = getLayoutPosition();
             Intent intent = new Intent(mContext, GamesDetailsActivity.class);
             intent.putExtra("position",itemPosition);
-            intent.putExtra("games", Parcels.wrap(mGames));
+            intent.putExtra("game", Parcels.wrap(mGames));
             mContext.startActivity(intent);
         }
     }
