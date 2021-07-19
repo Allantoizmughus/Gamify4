@@ -2,51 +2,54 @@ package com.moringaschool.gamify.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import java.util.List;
 
 
+@Parcel
 public class GameSearchResponse {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    public Integer id;
     @SerializedName("title")
     @Expose
-    private String title;
+    public String title;
     @SerializedName("thumbnail")
     @Expose
-    private String thumbnail;
+    public String thumbnail;
     @SerializedName("short_description")
     @Expose
-    private String shortDescription;
+    public String shortDescription;
     @SerializedName("game_url")
     @Expose
-    private String gameUrl;
+    public String gameUrl;
     @SerializedName("genre")
     @Expose
-    private String genre;
+    public String genre;
     @SerializedName("platform")
     @Expose
-    private String platform;
+    public String platform;
     @SerializedName("publisher")
     @Expose
-    private String publisher;
+    public String publisher;
     @SerializedName("developer")
     @Expose
-    private String developer;
+    public String developer;
     @SerializedName("release_date")
     @Expose
-    private String releaseDate;
+    public String releaseDate;
     @SerializedName("freetogame_profile_url")
     @Expose
-    private String freetogameProfileUrl;
+    public String freetogameProfileUrl;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-//    public GameSearchResponse() {
-//    }
+    public GameSearchResponse() {
+    }
 
     /**
      * 

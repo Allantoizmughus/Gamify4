@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:id="@+id/restaurantImageView"
+            android:id="@+id/gameImageView"
             android:src="@drawable/bgpic1"
             android:scaleType="centerCrop" />
 
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Released Date"
-                android:id="@+id/DateTextView"
+                android:id="@+id/dateTextView"
                 android:layout_alignTop="@+id/gameNameTextView"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"

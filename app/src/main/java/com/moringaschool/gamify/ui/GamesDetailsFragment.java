@@ -7,24 +7,25 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.moringaschool.gamify.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link GamesDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import butterknife.BindView;
+
+
 public class GamesDetailsFragment extends Fragment {
+    @BindView(R.id.gameImageView) ImageView mImageLabel;
+    @BindView(R.id.gameNameTextView) TextView mNameLabel;
+    @BindView(R.id.dateTextView) TextView mDateLabel;
+    @BindView(R.id.descriptionTextView) TextView mDescriptionLabel;
+    @BindView(R.id.developerTextView) TextView mDeveloperLabel;
+    @BindView(R.id.publisherTextView) TextView mPublisherLabel;
+    @BindView(R.id.linkTextView) TextView mLinkLabel;
+    @BindView(R.id.saveGameButton) Button mSaveButtonLabel;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public GamesDetailsFragment() {
         // Required empty public constructor
@@ -42,8 +43,7 @@ public class GamesDetailsFragment extends Fragment {
     public static GamesDetailsFragment newInstance(String param1, String param2) {
         GamesDetailsFragment fragment = new GamesDetailsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,8 +52,7 @@ public class GamesDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
