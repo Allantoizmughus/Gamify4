@@ -33,8 +33,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.AppName) TextView mAppName;
     @BindView(R.id.contacts) Button mContactsButton;
     @BindView(R.id.planets_spinner) Spinner mSelect;
+    @BindView(R.id.savedGamesButton) Button mSavedGamesButton;
 
-//    private SharedPreferences mSharedPreferences;
+
+    //    private SharedPreferences mSharedPreferences;
 //    private SharedPreferences.Editor mEditor;
 private DatabaseReference mSearchedCategoryReference;
 private ValueEventListener mSearchedCategoryReferenceListener;
@@ -78,6 +80,7 @@ private ValueEventListener mSearchedCategoryReferenceListener;
         Log.e("TAG","Before onClick");
         mViewCategoryButton.setOnClickListener(this);
         mContactsButton.setOnClickListener(this);
+        mSavedGamesButton.setOnClickListener(this);
 
     }
 
@@ -99,6 +102,9 @@ private ValueEventListener mSearchedCategoryReferenceListener;
             Intent intent = new Intent(MainActivity.this, ContactsActivity.class);
             startActivity(intent);
         }else if(v== mSelect){
+        }else if(v== mSavedGamesButton){
+            Intent intent = new Intent(MainActivity.this,SavedGamesListActivity.class);
+            startActivity(intent);
         }
     }
     public void saveCategoryToFirebase(String category){
