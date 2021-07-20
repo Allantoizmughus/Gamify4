@@ -56,7 +56,7 @@ public class FirebaseGamesViewHolder extends RecyclerView.ViewHolder implements 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constant.FIREBASE_CHILD_GAMES);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot datasnapshot) {
+            public void onDataChange(DataSnapshot datasnapshot) {
                 for(DataSnapshot snapshot:datasnapshot.getChildren()){
                     games.add(snapshot.getValue(GameSearchResponse.class));
                 }

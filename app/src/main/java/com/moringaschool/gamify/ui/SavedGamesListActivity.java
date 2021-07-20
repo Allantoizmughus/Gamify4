@@ -57,8 +57,8 @@ public class SavedGamesListActivity extends AppCompatActivity {
 
         mFirebaseAdapter = new FirebaseRecyclerAdapter<GameSearchResponse, FirebaseGamesViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull FirebaseGamesViewHolder FirebaseGamesViewholder, int position, @NonNull  GameSearchResponse game) {
-
+            protected void onBindViewHolder(@NonNull FirebaseGamesViewHolder firebaseGamesViewholder, int position, @NonNull  GameSearchResponse game) {
+                firebaseGamesViewholder.bindGame(game);
             }
 
             @NonNull
@@ -74,6 +74,12 @@ public class SavedGamesListActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        mFirebaseAdapter.startListening();
+    }
+
+    @Override
     protected void onStop(){
         super.onStop();
         if(mFirebaseAdapter != null){
@@ -86,7 +92,7 @@ public class SavedGamesListActivity extends AppCompatActivity {
     }
 
     private void showGames() {
-        mRecyclerView.setVisibility(View.GONE);
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
 
 }
