@@ -32,38 +32,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.ViewCategoryButton) Button mViewCategoryButton;
     @BindView(R.id.AppName) TextView mAppName;
     @BindView(R.id.contacts) Button mContactsButton;
-    @BindView(R.id.planets_spinner) Spinner mSelect;
+   // @BindView(R.id.planets_spinner) Spinner mSelect;
     @BindView(R.id.savedGamesButton) Button mSavedGamesButton;
 
 
-    //    private SharedPreferences mSharedPreferences;
+//    private SharedPreferences mSharedPreferences;
 //    private SharedPreferences.Editor mEditor;
-private DatabaseReference mSearchedCategoryReference;
-private ValueEventListener mSearchedCategoryReferenceListener;
+//    private DatabaseReference mSearchedCategoryReference;
+//    private ValueEventListener mSearchedCategoryReferenceListener;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mSearchedCategoryReference = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child(Constant.FIREBASE_CHILD_SEARCHED_CATEGORY);
-
-       mSearchedCategoryReferenceListener = mSearchedCategoryReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange( DataSnapshot datasnapshot) {
-                for(DataSnapshot categorySnapshot: datasnapshot.getChildren()){
-                    String category = categorySnapshot.getValue().toString();
-                    Log.d("Category update","Category" +category);
-                }
-            }
-
-            @Override
-            public void onCancelled( DatabaseError databaseError) {
-                //update UI here if error occurred.
-            }
-        });
+//        mSearchedCategoryReference = FirebaseDatabase
+//                .getInstance()
+//                .getReference()
+//                .child(Constant.FIREBASE_CHILD_SEARCHED_CATEGORY);
+//
+//       mSearchedCategoryReferenceListener = mSearchedCategoryReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange( DataSnapshot datasnapshot) {
+//                for(DataSnapshot categorySnapshot: datasnapshot.getChildren()){
+//                    String category = categorySnapshot.getValue().toString();
+//                    Log.d("Category update","Category" +category);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled( DatabaseError databaseError) {
+//                //update UI here if error occurred.
+//            }
+//        });
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -73,9 +73,9 @@ private ValueEventListener mSearchedCategoryReferenceListener;
 //        mEditor = mSharedPreferences.edit();
 
 
-        ArrayAdapter<String> myAdapter =new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item,getResources().getStringArray(R.array.cate));
-        myAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        mSelect.setAdapter(myAdapter);
+//        ArrayAdapter<String> myAdapter =new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item,getResources().getStringArray(R.array.cate));
+//        myAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+//        mSelect.setAdapter(myAdapter);
 
         Log.e("TAG","Before onClick");
         mViewCategoryButton.setOnClickListener(this);
@@ -87,37 +87,36 @@ private ValueEventListener mSearchedCategoryReferenceListener;
     @Override
     public void onClick(View v) {
         if (v == mViewCategoryButton) {
-            String category = mSelect.getSelectedItem().toString();
-
-            saveCategoryToFirebase(category);
+//            String category = mSelect.getSelectedItem().toString();
+//
+//            saveCategoryToFirebase(category);
 
 //            if(!(category).equals("")){
 //                addToSharedPreferences(category);
 //            }
             Intent intent = new Intent(MainActivity.this, GamesListActivity.class);
-            intent.putExtra("category",category);
+//            intent.putExtra("category",category);
             Log.e("TAG","Before startActivity");
             startActivity(intent);
         }else if(v == mContactsButton){
             Intent intent = new Intent(MainActivity.this, ContactsActivity.class);
             startActivity(intent);
-        }else if(v== mSelect){
-        }else if(v== mSavedGamesButton){
+        } else if(v== mSavedGamesButton){
             Intent intent = new Intent(MainActivity.this,SavedGamesListActivity.class);
             startActivity(intent);
         }
     }
-    public void saveCategoryToFirebase(String category){
-        mSearchedCategoryReference.push().setValue(category);
-    }
-
-//    private void addToSharedPreferences(String category) {
-//        mEditor.putString(Constant.PREFERENCES_CATEGORY_KEY, category).apply();
+//    public void saveCategoryToFirebase(String category){
+//        mSearchedCategoryReference.push().setValue(category);
 //    }
-
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        mSearchedCategoryReference.removeEventListener(mSearchedCategoryReferenceListener);
-    }
+//
+////    private void addToSharedPreferences(String category) {
+////        mEditor.putString(Constant.PREFERENCES_CATEGORY_KEY, category).apply();
+////    }
+//
+//    @Override
+//    protected void onDestroy(){
+//        super.onDestroy();
+//        mSearchedCategoryReference.removeEventListener(mSearchedCategoryReferenceListener);
+//    }
 }
