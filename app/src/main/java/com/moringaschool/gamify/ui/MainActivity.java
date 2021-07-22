@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.contacts) Button mContactsButton;
    // @BindView(R.id.planets_spinner) Spinner mSelect;
     @BindView(R.id.savedGamesButton) Button mSavedGamesButton;
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
 
 //    private SharedPreferences mSharedPreferences;
@@ -80,6 +84,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        ArrayAdapter<String> myAdapter =new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item,getResources().getStringArray(R.array.cate));
 //        myAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 //        mSelect.setAdapter(myAdapter);
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    getSupportActionBar().setTitle("Welcome," + user.getDisplayName()+ "!");
+                }else{
+
+                }
+            }
+        };
 
         Log.e("TAG","Before onClick");
         mViewCategoryButton.setOnClickListener(this);
@@ -132,6 +149,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
 //    public void saveCategoryToFirebase(String category){
