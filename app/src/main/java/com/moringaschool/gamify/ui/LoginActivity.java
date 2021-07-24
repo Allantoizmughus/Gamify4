@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.passwordEditText) EditText mPasswordEditText;
     @BindView(R.id.loginButton)
     Button mLoginButton;
+    @BindView(R.id.firebaseProgressBar)
+    ProgressBar mSignInProgressBar;
+    @BindView(R.id.loadingTextView) TextView mLoadingSignUp;
+
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -73,11 +78,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             mPasswordEditText.setError("Password cannot be blank");
             return;
         }
-
         mAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        hideProgressBar();
                         Log.d(TAG,"signInWithEmail:onComplete:" + task.isSuccessful());
                         if(!task.isSuccessful()){
                             Log.w(TAG,"signInWithEmail",task.getException());
@@ -96,7 +101,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         if(v == mLoginButton){
             loginWithPassword();
+            showProgressBar();
         }
+    }
+
+    private void showProgressBar() {
+        mSignInProgressBar.setVisibility(View.VISIBLE);
+        mLoadingSignUp.setVisibility(View.VISIBLE);
+        mLoadingSignUp.setText("Log in you in");
+    }
+
+    private void hideProgressBar() {
+        mSignInProgressBar.setVisibility(View.GONE);
+        mLoadingSignUp.setVisibility(View.GONE);
     }
 
     @Override

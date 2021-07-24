@@ -43,6 +43,9 @@ public class GameSearchResponse {
     @SerializedName("freetogame_profile_url")
     @Expose
     public String freetogameProfileUrl;
+    @SerializedName("pushId")
+    @Expose
+    public String pushId;
 
     /**
      * No args constructor for use in serialization
@@ -167,5 +170,11 @@ public class GameSearchResponse {
     public void setFreetogameProfileUrl(String freetogameProfileUrl) {
         this.freetogameProfileUrl = freetogameProfileUrl;
     }
+    public String getPushId(){
+        return pushId;
+    }
 
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
 }

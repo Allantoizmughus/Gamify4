@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.moringaschool.gamify.Constant;
@@ -40,7 +42,10 @@ public class SavedGamesListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_games_list);
         ButterKnife.bind(this);
 
-        mGamesReference = FirebaseDatabase.getInstance().getReference(Constant.FIREBASE_CHILD_GAMES);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        mGamesReference = FirebaseDatabase.getInstance().getReference(Constant.FIREBASE_CHILD_GAMES).child(uid);
 
         setUpFirebaseAdapter();
         hideProgressBar();

@@ -14,7 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DatabaseRegistrar;
 import com.google.firebase.database.FirebaseDatabase;
 import com.moringaschool.gamify.Constant;
 import com.moringaschool.gamify.R;
@@ -88,9 +91,18 @@ public class GamesDetailsFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if(v== mSaveGameButtonLabel){
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
+
             DatabaseReference gameRef = FirebaseDatabase
                     .getInstance()
-                    .getReference(Constant.FIREBASE_CHILD_GAMES);
+                    .getReference(Constant.FIREBASE_CHILD_GAMES)
+                    .child(uid);
+
+            DatabaseReference pushRef= gameRef.push();
+            String pushId= pushRef.getKey();
+            mGames.setPushId(pushId);
+            pushRef.setValue(mGames);
 
             gameRef.push().setValue(mGames);
             Toast.makeText(getContext(), "saved",Toast.LENGTH_SHORT).show();
