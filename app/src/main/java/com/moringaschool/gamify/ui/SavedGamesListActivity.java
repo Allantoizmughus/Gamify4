@@ -2,6 +2,7 @@ package com.moringaschool.gamify.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.moringaschool.gamify.Constant;
 import com.moringaschool.gamify.R;
+import com.moringaschool.gamify.adapters.FirebaseGamesListAdapter;
 import com.moringaschool.gamify.adapters.FirebaseGamesViewHolder;
 import com.moringaschool.gamify.models.GameSearchResponse;
 
@@ -27,10 +29,13 @@ import org.jetbrains.annotations.NotNull;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import util.OnStartDragListener;
+import util.SimpleItemTouchHelperCallback;
 
-public class SavedGamesListActivity extends AppCompatActivity {
+public class SavedGamesListActivity extends AppCompatActivity implements OnStartDragListener {
     private DatabaseReference mGamesReference;
-    private FirebaseRecyclerAdapter<GameSearchResponse, FirebaseGamesViewHolder> mFirebaseAdapter;
+    private FirebaseGamesListAdapter mFirebaseAdapter;
+    private ItemTouchHelper mItemTouchHelper;
 
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     @BindView(R.id.errorTextView) TextView mErrorTextView;
@@ -60,7 +65,7 @@ public class SavedGamesListActivity extends AppCompatActivity {
                 .setQuery(mGamesReference, GameSearchResponse.class)
                 .build();
 
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<GameSearchResponse, FirebaseGamesViewHolder>(options) {
+        mFirebaseAdapter = new FirebaseGamesListAdapter(options, mGamesReference, (OnStartDragListener) this, this) {
             @Override
             protected void onBindViewHolder(@NonNull FirebaseGamesViewHolder firebaseGamesViewholder, int position, @NonNull  GameSearchResponse game) {
                 firebaseGamesViewholder.bindGame(game);
@@ -76,6 +81,10 @@ public class SavedGamesListActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mFirebaseAdapter);
+        mRecyclerView.setHasFixedSize(true);
+        ItemTouchHelper.Callback callback= new SimpleItemTouchHelperCallback(mFirebaseAdapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
     @Override
@@ -100,4 +109,8 @@ public class SavedGamesListActivity extends AppCompatActivity {
         mRecyclerView.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+        mItemTouchHelper.startDrag(viewHolder);
+    }
 }

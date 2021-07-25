@@ -2,6 +2,7 @@ package com.moringaschool.gamify.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -33,6 +34,16 @@ public class FirebaseGamesListAdapter extends FirebaseRecyclerAdapter<GameSearch
     @Override
     protected void onBindViewHolder(@NonNull FirebaseGamesViewHolder firebaseGamesViewHolder, int position, @NonNull GameSearchResponse game) {
         firebaseGamesViewHolder.bindGame(game);
+        firebaseGamesViewHolder.mGameImageView.setOnTouchListener(new View.OnTouchListener(){
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getActionMasked()== MotionEvent.ACTION_DOWN){
+                    mOnStartDragListener.onStartDrag(firebaseGamesViewHolder);
+                }
+                return false;
+            }
+        });
     }
 
     @NonNull

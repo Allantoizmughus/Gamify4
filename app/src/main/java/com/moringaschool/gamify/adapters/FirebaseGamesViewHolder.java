@@ -30,6 +30,7 @@ import java.util.ArrayList;
 public class FirebaseGamesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     View mView;
     Context mContext;
+    public ImageView mGameImageView;
 
     public FirebaseGamesViewHolder( View itemView) {
         super(itemView);
@@ -40,12 +41,12 @@ public class FirebaseGamesViewHolder extends RecyclerView.ViewHolder implements 
     }
 
     public void bindGame(GameSearchResponse game){
-        ImageView gameImageView = (ImageView) mView.findViewById(R.id.gameImageView);
+        ImageView mGameImageView = (ImageView) mView.findViewById(R.id.gameImageView);
         TextView gameNameTextView = (TextView) mView.findViewById(R.id.gameNameTextView);
         TextView dateTextView = (TextView) mView.findViewById(R.id.dateTextView);
         TextView descriptionTextView = (TextView) mView.findViewById(R.id.descriptionTextView);
 
-        Picasso.get().load(game.getThumbnail()).into(gameImageView);
+        Picasso.get().load(game.getThumbnail()).into(mGameImageView);
 
         gameNameTextView.setText(game.getTitle());
         dateTextView.setText("Released on:"+game.getReleaseDate());
