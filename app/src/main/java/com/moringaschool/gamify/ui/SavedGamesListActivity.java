@@ -69,7 +69,7 @@ public class SavedGamesListActivity extends AppCompatActivity {
             @NonNull
             @Override
             public FirebaseGamesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.games_list_item, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.game_list_item_drag, parent, false);
                 return new FirebaseGamesViewHolder(view);
             }
         };
