@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.moringaschool.gamify.Constant;
 import com.moringaschool.gamify.R;
 import com.moringaschool.gamify.adapters.FirebaseGamesListAdapter;
@@ -61,11 +62,19 @@ public class SavedGamesListActivity extends AppCompatActivity implements OnStart
 
 
     private void setUpFirebaseAdapter() {
+        FirebaseUser user =FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+
+        Query query = FirebaseDatabase.getInstance()
+                .getReference(Constant.FIREBASE_CHILD_GAMES)
+                .child(uid)
+                .orderByChild(Constant.FIREBASE_QUERY_INDEX);
+
         FirebaseRecyclerOptions<GameSearchResponse> options= new FirebaseRecyclerOptions.Builder<GameSearchResponse>()
-                .setQuery(mGamesReference, GameSearchResponse.class)
+                .setQuery(query, GameSearchResponse.class)
                 .build();
 
-        mFirebaseAdapter = new FirebaseGamesListAdapter(options, mGamesReference, (OnStartDragListener) this, this) {
+        mFirebaseAdapter = new FirebaseGamesListAdapter(options, query, this, this) {
             @Override
             protected void onBindViewHolder(@NonNull FirebaseGamesViewHolder firebaseGamesViewholder, int position, @NonNull  GameSearchResponse game) {
                 firebaseGamesViewholder.bindGame(game);
@@ -113,4 +122,9 @@ public class SavedGamesListActivity extends AppCompatActivity implements OnStart
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
         mItemTouchHelper.startDrag(viewHolder);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mFirebaseAdapter.stopListening(); }
 }

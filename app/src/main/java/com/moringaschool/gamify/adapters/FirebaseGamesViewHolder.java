@@ -27,7 +27,10 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
-public class FirebaseGamesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class FirebaseGamesViewHolder extends RecyclerView.ViewHolder {
+    private static final int MAX_WIDTH = 200;
+    private static final int MAX_HEIGHT = 200;
+
     View mView;
     Context mContext;
     public ImageView mGameImageView;
@@ -36,7 +39,6 @@ public class FirebaseGamesViewHolder extends RecyclerView.ViewHolder implements 
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        itemView.setOnClickListener(this);
 
     }
 
@@ -53,32 +55,32 @@ public class FirebaseGamesViewHolder extends RecyclerView.ViewHolder implements 
         descriptionTextView.setText(game.getShortDescription());
     }
 
-    @Override
-    public void onClick(View view) {
-        final ArrayList<GameSearchResponse> games = new ArrayList<>();
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constant.FIREBASE_CHILD_GAMES).child(uid);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot datasnapshot) {
-                for(DataSnapshot snapshot:datasnapshot.getChildren()){
-                    games.add(snapshot.getValue(GameSearchResponse.class));
-                }
-                int itemPosition = getLayoutPosition();
-
-                Intent intent =new Intent(mContext, GamesDetailsActivity.class);
-                intent.putExtra("position",itemPosition + "");
-                intent.putExtra("games", Parcels.wrap(games));
-
-                mContext.startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled( DatabaseError databaseerror) {
-
-            }
-        });
-    }
+//    @Override
+//    public void onClick(View view) {
+//        final ArrayList<GameSearchResponse> games = new ArrayList<>();
+//
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        String uid = user.getUid();
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constant.FIREBASE_CHILD_GAMES).child(uid);
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot datasnapshot) {
+//                for(DataSnapshot snapshot:datasnapshot.getChildren()){
+//                    games.add(snapshot.getValue(GameSearchResponse.class));
+//                }
+//                int itemPosition = getLayoutPosition();
+//
+//                Intent intent =new Intent(mContext, GamesDetailsActivity.class);
+//                intent.putExtra("position",itemPosition + "");
+//                intent.putExtra("games", Parcels.wrap(games));
+//
+//                mContext.startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onCancelled( DatabaseError databaseerror) {
+//
+//            }
+//        });
+//    }
 }

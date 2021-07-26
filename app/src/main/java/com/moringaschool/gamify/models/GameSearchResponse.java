@@ -46,6 +46,9 @@ public class GameSearchResponse {
     @SerializedName("pushId")
     @Expose
     public String pushId;
+    @SerializedName("index")
+    @Expose
+    private String index;
 
     /**
      * No args constructor for use in serialization
@@ -81,6 +84,7 @@ public class GameSearchResponse {
         this.developer = developer;
         this.releaseDate = releaseDate;
         this.freetogameProfileUrl = freetogameProfileUrl;
+        this.index = index;
     }
 
     public Integer getId() {
@@ -176,5 +180,13 @@ public class GameSearchResponse {
 
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 }
